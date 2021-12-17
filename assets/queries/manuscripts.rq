@@ -1,0 +1,10 @@
+PREFIX data: <http://rdfh.ch/projects/0068#>
+PREFIX tln: <http://www.nie.org/ontology/nietzsche#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?manuscript ?title ?thumbImage ?gsaSignature WHERE {
+  ?manuscript a tln:ManuscriptUnity;
+      tln:hasTitle ?title;
+      tln:hasManuscriptType "Mappe";
+      tln:hasPages/rdf:first/tln:hasFaksimileImage/tln:hasThumburl ?thumbImage ;
+      tln:hasGsaSignature ?gsaSignature .
+}

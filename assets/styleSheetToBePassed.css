@@ -1,0 +1,79 @@
+body {
+}
+
+a {
+  cursor: pointer;
+  color: inherit; /* no colors for links. Color will be defined by semantic classes */
+  text-decoration: inherit; /* no underline */
+}
+
+::ng-deep .poly-menu {
+  width: 400px;
+}
+
+.semantic-tooltip {
+  white-space: pre-line;
+}
+
+.annotation-button {
+  padding: 0;
+  margin-right: 0.25em; // needed in case of semantic overlaps, i.e. when a button follows a button and the white space within a button does not make the button have white spaces around ...
+  border: 2px;
+  border-color: transparent;
+  background-color: transparent;
+  white-space: normal;
+}
+
+.annotation-button:hover {
+  cursor: pointer;
+  background-color: rgba(10, 104, 24, 0.21);
+  border-color: rgba(10, 104, 24, 0.21);
+}
+
+.annotation-button-icon {
+  padding: 0;
+  margin: 0.25em; // needed in case of semantic overlaps, i.e. when a button follows a button and the white space within a button does not make the button have white spaces around ...
+  border: 2px;
+  border-color: transparent;
+  background-color: transparent;
+  white-space: normal;
+}
+
+.annotation-button-icon:hover {
+  cursor: pointer;
+  background-color: rgba(10, 104, 24, 0.21);
+  border-color: rgba(10, 104, 24, 0.21);
+}
+
+.semantic-markup {
+}
+
+.semantic-markup.polysemantic {
+  text-decoration: underline;
+  color: #3aaf06;
+  font-weight: bold;
+}
+
+.semantic-markup.humgeo {
+  font-weight: bold;
+  color: #811ca4;
+}
+
+.humgeo.city {
+  color: #a45f33;
+}
+
+.humgeo.state {
+  color: #a45f33;
+}
+
+.semantic-markup.human {
+}
+
+.human.organization {
+  color: #faa20f;
+}
+
+.human.person{
+  color: #ff1715;
+}

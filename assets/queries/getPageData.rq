@@ -1,0 +1,19 @@
+PREFIX tln: <http://www.nie.org/ontology/nietzsche#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?page ?pageNumber ?image ?svgUrl ?primaryUrl ?thumb ?medium ?manuscript WHERE {
+    ?s (tln:hasPages/(rdf:rest*)/rdf:first) ?page.
+  ?page tln:hasNumber ?pageNumber.
+   # BIND (xsd:integer(REPLACE(?pageNumber, "\\D+", "")) AS ?sorting)
+   # BIND (COALESCE(?sorting, 0) AS ?number2)
+  OPTIONAL {
+      ?page tln:hasSvgImage ?svg.
+      ?svg tln:hasPrimaryurl ?svgUrl.
+      ?page tln:hasFaksimileImage ?image.
+      ?image tln:hasFileName ?imgLabel;
+        tln:hasPrimaryurl ?primaryUrl;
+        tln:hasThumburl ?thumb;
+        tln:hasMediumurl ?medium.
+    }
+  }
+  #ORDER BY (?sorting) #The pages are already sorted in the list!
