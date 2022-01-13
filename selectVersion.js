@@ -31,7 +31,11 @@ $(document).ready(function(){
    var currentUrl = new URL(location.href);
    $("body").prepend("<div id=\"selectContainer\" class=\"mui-select\"><select id=\"selectVersion\"></select></div>");
    $.getJSON("/versions.json", function(versions){
-      var currentVersion = writeBase(currentUrl, versions[0].number);
+      if (versions.length == 1){
+         $("body").remove("#selectVersion");
+         $("selectContainer").append("<select id=\"selectVersion\" disabled=\"true\"></select>");
+      } 
+      var currentVersion = writeBase(currentUrl, versions[0].number, versions.map(version =>version.number));
       $("body").append("<app-root><\/app-root>");
       versions.forEach(version =>{
          writeOptions(version, currentVersion);    
@@ -61,8 +65,11 @@ $(document).ready(function(){
 /**
  * Write the current base to the document body and return its value.
  **/
-function writeBase(currentUrl, newestVersion){
-  var baseHref = (currentUrl.pathname.split('/')[1] != '') ? currentUrl.pathname.split('/')[1] : newestVersion;
+function writeBase(currentUrl, newestVersion, versionNumbers){
+  var baseHref = currentUrl.pathname.split('/')[1];
+  if (baseHref == '' || !versionNumbers.includes(baseHref)){
+      baseHref = newestVersion;
+  }
   $("head").append("<base href=\"/" + baseHref + "/\"/>");
   return baseHref;
 }
